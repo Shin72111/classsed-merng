@@ -9,7 +9,8 @@ import {
   Image,
   Button,
   Icon,
-  Label
+  Label,
+  Popup
 } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
 
@@ -85,18 +86,24 @@ const SinglePost = props => {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
-                <Button
-                  as="div"
-                  labelPosition="right"
-                  onClick={() => console.log("Comment on post")}
-                >
-                  <Button basic color="blue">
-                    <Icon name="comments" />
-                  </Button>
-                  <Label basic color="blue" pointing="left">
-                    {commentCount}
-                  </Label>
-                </Button>
+                <Popup
+                  inverted
+                  content="Comment on post"
+                  trigger={
+                    <Button
+                      as="div"
+                      labelPosition="right"
+                      onClick={() => console.log("Comment on post")}
+                    >
+                      <Button basic color="blue">
+                        <Icon name="comments" />
+                      </Button>
+                      <Label basic color="blue" pointing="left">
+                        {commentCount}
+                      </Label>
+                    </Button>
+                  }
+                />
                 {user && user.username === username && (
                   <DeleteButton postId={id} callback={deletePostCallback} />
                 )}
